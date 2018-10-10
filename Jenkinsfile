@@ -5,7 +5,7 @@ node {
         }
 
         stage ('Build'){
-            sh "mvn compile"
+            sh "mvn package"
         }
         stage('Archive Artifacts'){
             archiveArtifacts artifacts: "target/*.hpi"
