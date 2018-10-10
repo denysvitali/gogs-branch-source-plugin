@@ -1,17 +1,17 @@
-pipeline {
-  agent any
-  stages {
-    stage("Build"){
-      steps {
-        sh "mvn compile"
-      }
+node {
+    try {
+        stage ('Checkout'){
+            checkout scm
+        }
+
+        stage ('Build'){
+            sh "mvn compile"
+        }
+        stage('Archive Artifacts'){
+            archiveArtifacts artifacts: "build/*"
+        }
+    } finally {
+        deleteDir()
     }
-  }
-  post {
-    always {
-        archiveArtifacts artifacts: 'target/*.hpi', fingerprint: true
-        cleanWs()
-    }
-  }
 }
 
