@@ -8,7 +8,7 @@ node {
             sh "mvn compile"
         }
         stage('Archive Artifacts'){
-            archiveArtifacts artifacts: "build/*"
+            archiveArtifacts artifacts: "target/*.hpi"
         }
     } finally {
         deleteDir()
